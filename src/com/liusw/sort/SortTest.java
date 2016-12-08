@@ -1,16 +1,25 @@
 package com.liusw.sort;
 
 import java.util.Arrays;
+import java.util.Date;
+import java.util.Random;
 
 public class SortTest {
 
 	public static void main(String[] args) {
-		int[] a = new int[] { 29, 12, 48, 3, 854, 23, 8, 83, 69 };
-		int[] b = insertSort(a);
-		System.out.println(Arrays.toString(b));
+		int[] a = initData(1000);
 
-		int[] c = bubbleSort(a);
-		System.out.println(Arrays.toString(c));
+		insertSort(a.clone());
+		bubbleSort(a.clone());
+	}
+
+	private static int[] initData(int size) {
+		int[] a = new int[size];
+		int range = size + 1;
+		for (int i = 0; i < size; i++) {
+			a[i] = new Random().nextInt(range);
+		}
+		return a;
 	}
 
 	/**
@@ -23,6 +32,7 @@ public class SortTest {
 		if (a == null || a.length < 2) {
 			return a;
 		}
+		long beginTime = new Date().getTime();
 		for (int i = a.length - 1; i > 0; --i) {
 			for (int j = 0; j < i; ++j) {
 				if (a[j + 1] < a[j]) {
@@ -32,6 +42,9 @@ public class SortTest {
 				}
 			}
 		}
+		long endTime = new Date().getTime();
+		System.out.println(a.length + "组随机数[插入排序]耗时：" + (endTime - beginTime) + "ms");
+		System.out.println(Arrays.toString(a));
 		return a;
 	}
 
@@ -45,6 +58,7 @@ public class SortTest {
 		if (arr == null || arr.length < 2) {
 			return arr;
 		}
+		long beginTime = new Date().getTime();
 		for (int i = 1; i < arr.length; i++) {
 			for (int j = i; j > 0; j--) {
 				if (arr[j] < arr[j - 1]) {
@@ -57,6 +71,9 @@ public class SortTest {
 				}
 			}
 		}
+		long endTime = new Date().getTime();
+		System.out.println(arr.length + "组随机数[插入排序]耗时：" + (endTime - beginTime) + "ms");
+		System.out.println(Arrays.toString(arr));
 		return arr;
 	}
 }
